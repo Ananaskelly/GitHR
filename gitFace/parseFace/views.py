@@ -20,8 +20,6 @@ import json
 import github
 
 from gitFace.helpClasses.viewDecorators import valid_token_required
-# serializer = SnippetSerializer(snippets, many=True)
-# serializer.data -- just JSON representation
 
 
 def main_page(request):
@@ -29,12 +27,16 @@ def main_page(request):
 
 @valid_token_required
 def token_profile(request, gitConn = None):
+    try:
 
-    if request.method == 'GET':
-        user = gitConn.get_user()
-        response = user.raw_data
-        response['repos_count'] = len(list(user.get_repos()))
-        return JSONResponse(json.dumps(response))
+        if request.method == 'GET':
+            user = gitConn.get_user()
+            response = user.raw_data
+            response['repos_count'] = len(list(user.get_repos()))
+            return JSONResponse(json.dumps(response))
+
+    except RateLimitExceededException as e:
+        return HttpResponse("you have consumed all your limit")
 
     return Http404("bad method")
 
@@ -53,7 +55,7 @@ def get_profile(request, profile_name, gitConn = None):
         except UnknownObjectException as e:
             return HttpResponse("this profile doesn't exist")
         except RateLimitExceededException as e:
-            return HttpResponse("your have consumed all your limit")
+            return HttpResponse("you have consumed all your limit")
 
         return JSONResponse(json.dumps(response))
 
