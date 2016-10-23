@@ -2,6 +2,8 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from django.views.decorators.csrf import csrf_exempt
+from github import RateLimitExceededException
+from github import UnknownObjectException
 from rest_framework import viewsets
 
 from gitFace.gitFaceConf import AppGitHubKeys
@@ -25,6 +27,37 @@ from gitFace.helpClasses.viewDecorators import valid_token_required
 def main_page(request):
     return render(request, 'home.html', {"clientId" : "e367ac8d3b8fea3451b4"})
 
+@valid_token_required
+def token_profile(request, gitConn = None):
+
+    if request.method == 'GET':
+        user = gitConn.get_user()
+        response = user.raw_data
+        response['repos_count'] = len(list(user.get_repos()))
+        return JSONResponse(json.dumps(response))
+
+    return Http404("bad method")
+
+@valid_token_required
+def get_profile(request, profile_name, gitConn = None):
+
+    if request.method == 'GET':
+        try:
+            user = gitConn.get_user(profile_name)
+            repos = list(user.get_repos())
+
+            response = user.raw_data
+            response['repos_count'] = len(repos)
+            response['repos_names'] = [rep.name for rep in repos]
+
+        except UnknownObjectException as e:
+            return HttpResponse("this profile doesn't exist")
+        except RateLimitExceededException as e:
+            return HttpResponse("your have consumed all your limit")
+
+        return JSONResponse(json.dumps(response))
+
+    return Http404("bad method")
 
 @valid_token_required
 def present(request, gitConn = None):
