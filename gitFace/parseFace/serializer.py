@@ -1,10 +1,17 @@
 
-
-
-
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .entities import *
+from github.AuthenticatedUser import AuthenticatedUser
+
+
+class ProfileSerializer(serializers.Serializer):
+    login = serializers.CharField(max_length=200)
+    name = serializers.CharField(max_length=200)
+    email = serializers.EmailField()
+    followers = serializers.IntegerField()
+    following = serializers.IntegerField()
+    company = serializers.CharField(max_length=200)
 
 
 class CommentSerializer(serializers.Serializer):
