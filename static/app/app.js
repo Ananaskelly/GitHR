@@ -15,8 +15,17 @@ config(['$locationProvider', '$stateProvider', function($locationProvider, $stat
           state('main', {
                 url: '/',
                 views: {
-                    "viewA": {templateUrl: "app/template/main.html"}
+                    "viewA": {templateUrl: "/static/app/template/main.html"},
+                    "viewB": {templateUrl: "/static/app/template/navbar.html"}
                 },
                 controller: 'mainCtrl'
+            }).
+          state('search', {
+                url: '/search',
+                views: {
+                    "viewA": {templateUrl: "/static/app/template/search.html"},
+                    "viewB": {templateUrl: "/static/app/template/innerNavbar.html"}
+                },
+                controller: 'searchCtrl'
             })
 }]);
