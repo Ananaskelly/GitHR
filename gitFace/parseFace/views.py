@@ -40,7 +40,7 @@ def get_profile(request, profile_name, gitConn = None):
     repos = list(user.get_repos())
     response = user.raw_data
     response['repos_count'] = len(repos)
-    response['repos_names'] = [rep.name for rep in repos]
+    response['repos_names'] = [rep.full_name for rep in repos]
 
     return JSONResponse(json.dumps(response))
 
