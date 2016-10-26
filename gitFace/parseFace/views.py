@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from gitFace.gitFaceConf import AppGitHubKeys
+from gitFace.gitFaceConf import AppGitHubKeys, MainPageString
 
 from gitFace.helpClasses.JSONResponse import JSONResponse
 
@@ -15,9 +15,11 @@ import json
 from gitFace.helpClasses.viewDecorators import valid_token_required, api_exception_catcher
 
 
-def main_page(request):
+def test_page(request):
     return render(request, 'home.html', {"clientId" : "e367ac8d3b8fea3451b4"})
 
+def main_page(request):
+    return HttpResponse(MainPageString)
 
 @require_http_methods(["GET"])
 @valid_token_required
