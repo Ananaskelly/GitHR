@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.main_page, name='main'),
+    url(r'^test/$', views.test_page, name='main'),
     url(r'^callback/', views.callback, name='callback'),
     url(r'^present/', views.present, name='present'),
     url(r'^current/', views.token_profile, name='token_profile'),
