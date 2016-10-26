@@ -56,3 +56,110 @@ html, body {
     display: flex;
     align-items: center;
 }
+
+.user-profile-wrapper {
+    width: 100%;
+    padding-top: 51px;
+    font-family: 'Raleway', sans-serif;
+}
+.user-profile-content {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    padding: 15px;
+}
+.main-info {
+    width: 100%;
+}
+.main-info-left-info {
+    padding: 15px;
+}
+.cl-4 {
+    width: 33.33333333%;
+    float: left;
+}
+.photo-wrapper {
+    width: 220px;
+    padding: 2% 5% 5% 5%;
+    margin: 0 auto;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    background-color: #FEFEFE;
+}
+.main-info-user-photo {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+.clear-float {
+    clear: left;
+}
+.user-login, .user-company, .user-email {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+    padding: 5px 0;
+    font-size: 150%;
+}
+.user-company, .user-email {
+    font-size: 120%;
+}
+.main-info-since {
+    padding: 15px;
+}
+.main-info-since label {
+    font-size: 120%;
+}
+.main-info-right-info, .main-info-left-info {
+    padding: 15px;
+}
+.organization-header, .main-info-list-header {
+    text-align: center;
+    font-size: 140%;
+    font-weight: bold;
+}
+.organization-items{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.score-items {
+    padding: 15px;
+}
+.org-item {
+    display: inline-block;
+    padding: 2% 2%;
+    margin: 0 2%;
+    border: 1px solid #467CA8;
+    border-radius: 3px;
+    background-color: #467CA8;
+    color: white;
+    white-space: nowrap;
+}
+.user-lang {
+    width: 100%;
+}
+.lang-items {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.lang-item {
+    display: inline-block;
+    background-color: #4A6B4E;
+    border: 1px solid #4A6B4E;
+    border-radius: 3px;
+    padding: 5px 15px;
+    font-size: 120%;
+    color: white;
+    margin: 1%;
+}
+.score-item-font {
+    font-size: 150%;
+}
+.scope-items-label {
+    color: darkgray;
+    font-weight: normal;
+}

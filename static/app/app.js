@@ -27,5 +27,11 @@ config(['$locationProvider', '$stateProvider', function($locationProvider, $stat
                     "viewB": {templateUrl: "/static/app/template/innerNavbar.html"}
                 },
                 controller: 'searchCtrl'
-            })
+            }).
+          state('userProfile', {
+              url: '/user/test',
+              views: {
+                  "viewA": {templateUrl: "/static/app/template/userProfile.html"},
+                  "viewB": {templateUrl: "/static/app/template/innerNavbar.html"}
+              }			
 }]);
