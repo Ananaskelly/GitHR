@@ -1,4 +1,4 @@
-
+import time
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
@@ -14,13 +14,12 @@ def api_exception_catcher(the_func):
             res = the_func(*args, **kwargs)
             return res
         except RateLimitExceededException as e:
-            return HttpResponseForbidden('limit')
+            return HttpResponseForbidden('token_limit')
         except BadCredentialsException as e:
             return HttpResponseForbidden('badkey')
         except UnknownObjectException as e:
             return HttpResponseNotFound('not_found')
     return _decorated
-
 
 def valid_token_required(function=None):
     """
@@ -38,10 +37,10 @@ def valid_token_required(function=None):
                         kwargs['gitConn'] = git
                         return view_func(request, *args, **kwargs)
                 except RateLimitExceededException as e:
-                    return HttpResponseForbidden('limit')
+                    return HttpResponseForbidden('token_limit')
                 except BadCredentialsException as e:
                     return HttpResponseForbidden('badkey')
-            return redirect('/')
+            return HttpResponseForbidden('require_token')
 
         _view.__name__ = view_func.__name__
         _view.__dict__ = view_func.__dict__
