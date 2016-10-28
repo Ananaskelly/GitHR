@@ -19,7 +19,13 @@ def api_exception_catcher(the_func):
             return HttpResponseForbidden('badkey')
         except UnknownObjectException as e:
             return HttpResponseNotFound('not_found')
+
+    _decorated.__name__ = the_func.__name__
+    _decorated.__dict__ = the_func.__dict__
+    _decorated.__doc__ = the_func.__doc__
+
     return _decorated
+
 
 def valid_token_required(function=None):
     """
