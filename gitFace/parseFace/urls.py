@@ -4,7 +4,6 @@ from rest_framework import routers
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.main_page, name='main'),
     url(r'^test/$', views.test_page, name='main'),
     url(r'^callback/', views.callback, name='callback'),
     url(r'^present/', views.present, name='present'),
@@ -14,4 +13,7 @@ urlpatterns = [
     # слово + дефис + любое их количество до слеша /
     url(r'^api/(?P<profile_name>[\w\-]+)/$', views.get_profile, name='get_profile'),
     url(r'^api/repos/(?P<profile_name>[\w\-]+)/$', views.get_repos, name='get_repos'),
+    url(r'^', views.main_page, name='main'),
 ]
+
+
