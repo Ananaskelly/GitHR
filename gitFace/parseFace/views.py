@@ -1,50 +1,37 @@
-
+import json
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
 from gitFace.gitFaceConf import AppGitHubKeys, MainPageString
-
 from gitFace.helpClasses.JSONResponse import JSONResponse
-
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
-import json
-
+from gitFace.helpClasses.api_services import get_profile_dict
 from gitFace.helpClasses.viewDecorators import valid_token_required, api_exception_catcher
 
 
 def test_page(request):
-    return render(request, 'home.html', {"clientId" : "e367ac8d3b8fea3451b4"})
+    return render(request, 'home.html', {"clientId": "e367ac8d3b8fea3451b4"})
+
 
 def main_page(request):
     return HttpResponse(MainPageString)
+
 
 @require_http_methods(["GET"])
 @valid_token_required
 @api_exception_catcher
 def token_profile(request, gitConn = None):
-
-    user = gitConn.get_user()
-    response = user.raw_data
-    response['repos_count'] = len(list(user.get_repos()))
-
-    return JSONResponse(json.dumps(response))
+    return JSONResponse(get_profile_dict(git_conn=gitConn))
 
 
 @require_http_methods(["GET"])
 @valid_token_required
 @api_exception_catcher
 def get_profile(request, profile_name, gitConn = None):
-
-    user = gitConn.get_user(profile_name)
-    repos = list(user.get_repos())
-    response = user.raw_data
-    response['repos_count'] = len(repos)
-    response['repos_names'] = [rep.full_name for rep in repos]
-
-    return JSONResponse(json.dumps(response))
+    return JSONResponse(get_profile_dict(git_conn=gitConn, profile_name=profile_name))
 
 
 @require_http_methods(["GET"])
@@ -71,8 +58,8 @@ def callback(request):
         url = 'https://github.com/login/oauth/access_token'
         # Set POST fields here
         post_fields = {
-            'client_id': AppGitHubKeys['client_id'],
-            'client_secret': AppGitHubKeys['client_secret'],
+            'client_id': AppGitHubKeys.client_id,
+            'client_secret': AppGitHubKeys.client_secret,
             'code': temp_code
                        }
         headers = {'Accept': 'application/json'}
