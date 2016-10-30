@@ -33,5 +33,6 @@ config(['$locationProvider', '$stateProvider', function($locationProvider, $stat
               views: {
                   "viewA": {templateUrl: "/static/app/template/userProfile.html"},
                   "viewB": {templateUrl: "/static/app/template/innerNavbar.html"}
-              })			
+              }})
+		$locationProvider.html5Mode(true);
 }]);
