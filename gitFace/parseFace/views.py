@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 
 from gitFace.gitFaceConf import AppGitHubKeys, MainPageString
@@ -17,7 +17,42 @@ def test_page(request):
 
 
 def main_page(request):
-    return HttpResponse(MainPageString)
+    response = HttpResponse(MainPageString)
+    return response
+
+
+def have_token(request):
+    return HttpResponse(str('token' in request.session))
+
+
+@require_http_methods(["GET"])
+@valid_token_required
+@api_exception_catcher
+def get_repos(request, profile_name, gitConn = None):
+    user = gitConn.get_user(profile_name)
+    l1 = [rep for rep in user.get_repos("all")]
+    l2 = [rep for rep in user.get_subscriptions()]
+    # l3 = [rep for rep in user.get_watched()] #Есть некоторые просто со звёздами, в них кусочки кода
+    repos = l1 + l2
+
+    full_data = {}
+    for rep in repos:
+        if rep.full_name not in full_data:
+            full_data[rep.full_name] = {
+                'full_name': rep.full_name,
+                'name': rep.name,
+                'description': rep.description,
+                'html_url': rep.html_url,
+                'homepage': rep.homepage,
+                'stars': rep.watchers,
+                'forks': rep.forks,
+                'size': rep.size,
+                'language': rep.language,
+                'created_at': rep.created_at.strftime("%d-%m-%Y"),
+                'updated_at': rep.updated_at.strftime("%d-%m-%Y"),
+            }
+
+    return JSONResponse(full_data)
 
 
 @require_http_methods(["GET"])
@@ -70,7 +105,8 @@ def callback(request):
 
         if 'error' not in data:
             request.session['token'] = data['access_token']
-            return HttpResponse("Your new token : " + data['access_token'])
+            # return HttpResponse("Your new token : " + data['access_token'])
+            return redirect('/')
         else:
             error += data['error']
     else:
