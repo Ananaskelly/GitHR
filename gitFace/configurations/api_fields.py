@@ -6,7 +6,8 @@
 
 # ================ PROFILE
 
-__profile_required_keys = ('login', 'name', 'html_url', 'avatar_url', 'bio', 'email', 'location', 'created_at', 'company', 'blog', 'followers', 'public_repos',)
+__profile_required_keys = frozenset(['login', 'name', 'html_url', 'avatar_url', 'bio', 'email', 'location',
+                                     'created_at', 'company', 'blog', 'followers', 'public_repos',])
 
 # ('following_url', 'https://api.github.com/users/mbostock/following{/other_user}')
 # ('events_url', 'https://api.github.com/users/mbostock/events{/privacy}')
@@ -48,7 +49,7 @@ __profile_required_keys = ('login', 'name', 'html_url', 'avatar_url', 'bio', 'em
 
 # =========== ORGANISATION
 
-__organisation_required_keys = ('login', 'avatar_url', 'html_url')
+__organisation_required_keys = frozenset(['login', 'avatar_url', 'html_url'])
 
 # ('repos_url', 'https://api.github.com/orgs/protovis/repos')
 # ('updated_at', '2015-05-31T16:22:40Z')
@@ -93,4 +94,5 @@ class __RequiredFields(object):
 
 # Config Instance
 ConfInstance = __RequiredFields(profile_required_keys=__profile_required_keys,
-                                organisation_required_keys=__organisation_required_keys)
+                                organisation_required_keys=__organisation_required_keys
+                                )
