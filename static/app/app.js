@@ -1,7 +1,8 @@
 'use strict';
 angular.module('myApp', [
   'ui.router',
-  'app.controller'
+  'app.controller',
+  'app.service'
 ]).
 config(['$locationProvider', '$stateProvider', function($locationProvider, $stateProvider) {
         $stateProvider.
