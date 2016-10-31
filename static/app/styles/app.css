@@ -109,6 +109,21 @@ html, body {
     border-radius: 3px;
 }
 /* end MAIN */
+/* inner-navbar */
+.nav-user-photo-wrapper {
+    width: 40px;
+    margin: 0 10px;
+    border-radius: 50%;
+}
+.custom-nav-list {
+	display: flex;
+    align-items: center;
+}
+.nav-user-photo {
+    width: 100%;
+    border-radius: 50%;
+}
+/* end inner-navbar */
 .search-wrapper {
     padding: 81px 15px 15px 15px;
     width: 100%;
@@ -117,6 +132,7 @@ html, body {
 .ride-a-bike {
     display: flex;
     align-items: center;
+	margin: 15px;
 }
 
 .user-profile-wrapper {
@@ -146,7 +162,7 @@ html, body {
     margin: 0 auto;
     border: 1px solid darkgray;
     border-radius: 3px;
-    background-color: #FEFEFE;
+    background-color: rgb(248, 248, 248);
 }
 .main-info-user-photo {
     width: 100%;
@@ -157,14 +173,14 @@ html, body {
 .clear-float {
     clear: left;
 }
-.user-login, .user-company, .user-email {
+.user-login, .user-company, .user-email, .user-name, .user-location {
     width: 100%;
     text-align: center;
     margin: 5px 0;
     padding: 5px 0;
     font-size: 150%;
 }
-.user-company, .user-email {
+.user-company, .user-email, .user-name, .user-location  {
     font-size: 120%;
 }
 .main-info-since {
@@ -181,18 +197,27 @@ html, body {
     font-size: 140%;
     font-weight: bold;
 }
-.organization-items{
-    padding: 15px;
-    display: flex;
-    justify-content: center;
+.main-info-organization {
+	max-width: 100%;
 }
+.organization-items{
+	max-width: 100%;
+    padding: 15px;
+}
+.organization-a {
+	color: white;
+}
+.organization-a:hover {
+	color: #FEFEFE;
+}
+
 .score-items {
     padding: 15px;
 }
 .org-item {
     display: inline-block;
     padding: 2% 2%;
-    margin: 0 2%;
+    margin: 2% 2%;
     border: 1px solid #467CA8;
     border-radius: 3px;
     background-color: #467CA8;

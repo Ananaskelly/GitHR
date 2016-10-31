@@ -30,7 +30,7 @@ config(['$locationProvider', '$stateProvider', function($locationProvider, $stat
                 controller: 'searchCtrl'
             }).
           state('userProfile', {
-              url: '/user/test',
+              url: '/user?login',
               views: {
                   "viewA": {templateUrl: "/static/app/template/userProfile.html"},
                   "viewB": {templateUrl: "/static/app/template/innerNavbar.html"}

@@ -1,4 +1,4 @@
-<div class="user-profile-wrapper">
+<div class="user-profile-wrapper" ng-controller="userProfileCtrl">
     <div class="user-profile-content">
         <div class="main-info">
             <div class="main-info-left-info cl-4">
@@ -8,25 +8,20 @@
                         Organization
                     </div>
                     <div class="organization-items">
-                        <div class="org-item">
-                            I have not
-                        </div>
-                        <div class="org-item">
-                            good
-                        </div>
-                        <div class="org-item">
-                            ideas
+                        <div ng-repeat="org in user.organisations" class="org-item">
+                            <a class="a-remove-style organization-a" href="{{org.html_url}}"> {{org.login}}</a>
                         </div>
                     </div>
                 </div>
                 <div class="main-info-since">
-                    <label> Since: </label> 10.12.13
+                    <label> Since: </label> <span> {{user.created_at | date : 'medium'}}</span>
                 </div>
 
             </div>
             <div class="main-info-photo cl-4">
                 <div class="photo-wrapper">
-                    <img class="main-info-user-photo" src="/static/app/img/user-icon.png">
+					<img ng-show="user.avatar_url" class="main-info-user-photo" src="{{user.avatar_url}}">
+                    <img ng-show="!user.avatar_url" class="main-info-user-photo" src="/static/app/img/user-icon.png">
                 </div>
             </div>
             <div class="main-info-right-info cl-4">
@@ -49,10 +44,12 @@
                 </div>
             </div>
             <div class="clear-float"></div>
-            <div class="user-login"> @Ananaskelly </div>
-            <div class="user-email"> <span style="color: #474350" class="glyphicon glyphicon-envelope"></span> anastasiya_johnni@mail.ru </div>
-            <div class="user-company"> <span style="color: #474350" class="glyphicon glyphicon-briefcase"></span> student </div>
-            <div class="user-lang">
+            <div class="user-login" g-show="user.login"> <a class="a-remove-style" href="{{html_url}}">@{{user.login}}</a></div>
+			<div class="user-name" ng-show="user.name"><span style="color: #474350" class="glyphicon glyphicon-user"> {{user.name}} </div>
+            <div class="user-email" ng-show="user.email"> <span style="color: #474350" class="glyphicon glyphicon-envelope"></span> {{user.email}} </div>
+            <div class="user-company" ng-show="user.company"> <span style="color: #474350" class="glyphicon glyphicon-briefcase"></span> {{user.company}} </div>
+            <div class="user-location" ng-show="user.location"><span class="glyphicon glyphicon-map-marker" style="color: #474350"></span> {{ user.location }} </div> 
+			<div class="user-lang">
                 <div class="lang-items">
                     <div class="lang-item">JavaScript</div>
                     <div class="lang-item">Java</div>
