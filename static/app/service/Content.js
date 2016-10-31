@@ -5,7 +5,7 @@ angular.module('app.service', [])
 				var getting = $q.defer();
                 $http({
                     method: 'GET',
-                    url: '/token_profile'
+                    url: '/token'
                 }).success(function (response) {
                     return getting.resolve(response);
                 })
