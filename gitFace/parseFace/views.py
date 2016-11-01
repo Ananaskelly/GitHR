@@ -1,6 +1,11 @@
 import json
+from functools import reduce
+from multiprocessing.pool import ThreadPool, Pool
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+
+from datetime import timedelta, datetime
+import time
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -8,7 +13,7 @@ from django.views.decorators.http import require_http_methods
 
 from gitFace.gitFaceConf import AppGitHubKeys, MainPageString
 from gitFace.helpClasses.JSONResponse import JSONResponse
-from gitFace.helpClasses.api_services import get_profile_dict
+from gitFace.helpClasses.api_services import get_profile_dict, get_subscriptions_page, get_repos_page
 from gitFace.helpClasses.viewDecorators import valid_token_required, api_exception_catcher
 
 
@@ -30,20 +35,26 @@ def have_token(request):
 @api_exception_catcher
 def get_repos(request, profile_name, gitConn = None):
     user = gitConn.get_user(profile_name)
-    l1 = [rep for rep in user.get_repos("all")]
-    l2 = [rep for rep in user.get_subscriptions()]
+    pool = ThreadPool(10)
+    l1 = pool.map(lambda num: get_subscriptions_page(num, user), range(20))
+    l2 = pool.map(lambda num: get_repos_page(num, user), range(10))
     # l3 = [rep for rep in user.get_watched()] #Есть некоторые просто со звёздами, в них кусочки кода
-    repos = l1 + l2
+    flat_repos = l1 + l2
+    repos = reduce(list.__add__, flat_repos)
 
     full_data = {}
+    time_expire = datetime.now() - timedelta(weeks=108)
+
     for rep in repos:
+        if rep.updated_at < time_expire:
+            continue
         if rep.full_name not in full_data:
             full_data[rep.full_name] = {
                 'full_name': rep.full_name,
-                'name': rep.name,
+                # 'name': rep.name,
                 'description': rep.description,
                 'html_url': rep.html_url,
-                'homepage': rep.homepage,
+                # 'homepage': rep.homepage,
                 'stars': rep.watchers,
                 'forks': rep.forks,
                 'size': rep.size,
@@ -51,6 +62,7 @@ def get_repos(request, profile_name, gitConn = None):
                 'created_at': rep.created_at.strftime("%d-%m-%Y"),
                 'updated_at': rep.updated_at.strftime("%d-%m-%Y"),
             }
+
 
     return JSONResponse(full_data)
 

@@ -2,6 +2,16 @@ from gitFace.helpClasses.gitFaceUtils import filter_keys
 from gitFace.configurations.api_fields import ConfInstance
 
 
+
+
+def get_subscriptions_page(page, user):
+    return [rep for rep in user.get_subscriptions().get_page(page)]
+
+
+def get_repos_page(page, user):
+    return [rep for rep in user.get_repos("all").get_page(page)]
+
+
 """
 params :
     git_conn = github.Github(token)
