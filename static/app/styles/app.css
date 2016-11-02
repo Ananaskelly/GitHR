@@ -30,9 +30,13 @@ html, body {
 .nav-container {
     position: fixed;
     width: 100%;
+	z-index: 999;
 }
 .cursor-pointer {
     cursor: pointer;
+}
+.font-bold {
+	font-weight: bold;
 }
 .hover:hover {
     opacity: 0.8;
@@ -144,7 +148,7 @@ html, body {
     width: 100%;
     margin: 0 auto;
     display: block;
-    padding: 15px;
+    padding: 30px 15px;
 }
 .main-info {
     width: 100%;
@@ -157,6 +161,10 @@ html, body {
     width: 33.33333333%;
     float: left;
 }
+.cl-8 {
+	width: 66.66666666%;
+    float: left;
+}
 .photo-wrapper {
     width: 220px;
     padding: 2% 5% 5% 5%;
@@ -164,6 +172,10 @@ html, body {
     border: 1px solid darkgray;
     border-radius: 3px;
     background-color: rgb(248, 248, 248);
+}
+.user-personal-wrapper {
+	width: 220px;
+    margin: 0 auto;
 }
 .main-info-user-photo {
     width: 100%;
@@ -174,15 +186,78 @@ html, body {
 .clear-float {
     clear: left;
 }
-.user-login, .user-company, .user-email, .user-name, .user-location {
+.user-data {
     width: 100%;
-    text-align: center;
-    margin: 5px 0;
     padding: 5px 0;
-    font-size: 150%;
 }
-.user-company, .user-email, .user-name, .user-location  {
-    font-size: 120%;
+.user-login {
+    font-size: 150%;
+	margin: 5px 0;
+}
+.user-score-wrapper {
+	padding: 0 15px 15px 15px;
+    border-bottom: 1px solid lightgray;
+}
+.organization-wrapper {
+	padding: 0 15px;
+    border-bottom: 1px solid lightgray;
+}
+.organization-items{
+	max-width: 100%;
+	overflow: hidden;
+}
+.organization-header {
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+	padding: 5px 0;
+}
+.org-item {
+    display: inline-block;
+    padding: 7px;
+    margin: 15px;
+    border: 1px solid #467CA8;
+    border-radius: 3px;
+    color: white;
+    white-space: nowrap;
+	font-weight: bold;
+}
+.org-item:hover {
+	opacity: 0.8;
+	box-shadow: 0 0 1px 1px rgba(70, 124, 168, 0.3)
+}
+.organization-a {
+	color: #467CA8;
+}
+.lang-wrapper {
+	padding: 15px;
+}
+.lang-items {
+    overflow: hidden;
+}
+.lang-item {
+    display: inline-block;
+    border: 1px solid #4A6B4E;
+    border-radius: 3px;
+    color: #4A6B4E;
+    padding: 7px;
+    margin: 15px;
+    font-weight: bold;
+}
+.user-score {
+	float: right;
+}
+.score-item {
+	text-align: center;
+	float: left;
+    padding: 0 15px;
+}
+.score-lg-font {
+	font-size: 200%;
+    font-weight: bold;
+}
+.main-info-since-wrapper {
+	float: left;
 }
 .main-info-since {
     padding: 15px;
@@ -190,59 +265,17 @@ html, body {
 .main-info-since label {
     font-size: 120%;
 }
-.main-info-right-info, .main-info-left-info {
+.main-info-left-info {
     padding: 15px;
-}
-.organization-header, .main-info-list-header {
-    text-align: center;
-    font-size: 140%;
-    font-weight: bold;
 }
 .main-info-organization {
 	max-width: 100%;
 }
-.organization-items{
-	max-width: 100%;
-    padding: 15px;
-}
-.organization-a {
-	color: white;
-}
-.organization-a:hover {
-	color: #FEFEFE;
-}
-
 .score-items {
     padding: 15px;
 }
-.org-item {
-    display: inline-block;
-    padding: 2% 2%;
-    margin: 2% 2%;
-    border: 1px solid #467CA8;
-    border-radius: 3px;
-    background-color: #467CA8;
-    color: white;
-    white-space: nowrap;
-}
 .user-lang {
     width: 100%;
-}
-.lang-items {
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-}
-
-.lang-item {
-    display: inline-block;
-    background-color: #4A6B4E;
-    border: 1px solid #4A6B4E;
-    border-radius: 3px;
-    padding: 5px 15px;
-    font-size: 120%;
-    color: white;
-    margin: 1%;
 }
 .repos-block-wrapper {
 	width: 90%;
@@ -261,6 +294,9 @@ html, body {
     margin: 15px;
 	text-align: left;
 	background-color: #FEFEFE;
+}
+.repos:hover {
+	box-shadow: 0 0 1px 1px rgba(212, 212, 212, 0.57);
 }
 .rep-header {
 	font-size: 140%;
@@ -289,11 +325,4 @@ html, body {
 }
 .rep-date-label-color{
 	color: #999;
-}
-.score-item-font {
-    font-size: 150%;
-}
-.scope-items-label {
-    color: darkgray;
-    font-weight: normal;
 }

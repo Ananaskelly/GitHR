@@ -1,10 +1,50 @@
 <div class="user-profile-wrapper" ng-controller="userProfileCtrl">
     <div class="user-profile-content">
         <div class="main-info">
-            <div class="main-info-left-info cl-4">
-
-                <div class="main-info-organization">
-                    <div class="organization-header">
+			<div class="main-info-photo cl-4">
+                <div class="photo-wrapper">
+					<img ng-show="user.avatar_url" class="main-info-user-photo" src="{{user.avatar_url}}">
+                    <img ng-show="!user.avatar_url" class="main-info-user-photo" src="/static/app/img/user-icon.png">
+                </div>
+				<div class="user-personal-wrapper">
+					<div class="user-data user-login" ng-show="user.login"> 
+						<a class="a-remove-style" href="{{html_url}}"> @{{user.login}}</a>
+					</div>
+					<div class="user-data" ng-show="user.name">
+						<span style="color: #474350" class="glyphicon glyphicon-user">&nbsp;{{user.name}} 
+					</div>
+					<div class="user-data" ng-show="user.email">
+						<span style="color: #474350" class="glyphicon glyphicon-envelope"></span>&nbsp;{{user.email}} 
+					</div>
+					<div class="user-data" ng-show="user.company"> 
+						<span style="color: #474350" class="glyphicon glyphicon-briefcase"></span>&nbsp;{{user.company}} 
+					</div>
+					<div class="user-data" ng-show="user.location">
+						<span class="glyphicon glyphicon-map-marker" style="color: #474350"></span>&nbsp;{{user.location}} 
+					</div>
+				</div> 
+            </div>
+			<div class="cl-8 user-score-wrapper">
+				<div class="main-info-since-wrapper">
+					<div class="main-info-since">
+                    <label> Since: </label> <span> {{user.created_at | date : 'medium'}}</span>
+                </div>
+				</div>	
+				<div class="user-score">
+					<div class="score-item">
+						<span class="score-lg-font">22</span><br> BALL
+					</div>
+					<div class="score-item">
+						<span class="score-lg-font">22</span><br> TOTAL LINES
+					</div>
+					<div class="score-item">
+						<span class="score-lg-font">22</span><br> TOTAL COMMITS
+					</div>
+				</div>
+			</div>
+			<div class="cl-8 organization-wrapper">
+				<div>
+					<div class="organization-header">
                         Organization
                     </div>
                     <div class="organization-items">
@@ -12,51 +52,19 @@
                             <a class="a-remove-style organization-a" href="{{org.html_url}}"> {{org.login}}</a>
                         </div>
                     </div>
-                </div>
-                <div class="main-info-since">
-                    <label> Since: </label> <span> {{user.created_at | date : 'medium'}}</span>
-                </div>
-
-            </div>
-            <div class="main-info-photo cl-4">
-                <div class="photo-wrapper">
-					<img ng-show="user.avatar_url" class="main-info-user-photo" src="{{user.avatar_url}}">
-                    <img ng-show="!user.avatar_url" class="main-info-user-photo" src="/static/app/img/user-icon.png">
-                </div>
-            </div>
-            <div class="main-info-right-info cl-4">
-                <div class="main-info-list">
-                    <div class="main-info-list-header">SCORE</div>
-                    <div class="score-items">
-                        <div>
-                            <label class="scope-items-label">BALL:&nbsp;&nbsp;</label><span class="score-item-font">100</span>
-                        </div>
-                        <hr width="100%" align="center" style="margin: 5px;">
-                        <div>
-                            <label class="scope-items-label">TOTAL LINES:&nbsp;&nbsp;</label>&nbsp;<span class="score-item-font">42</span>
-                        </div>
-                        <hr width="100%" align="center" style="margin: 5px;">
-                        <div>
-                            <label class="scope-items-label">TOTAL COMMITS:&nbsp;&nbsp;</label>&nbsp;<span class="score-item-font">4242</span>
-                        </div>
-                        <hr width="100%" style="margin: 5px;">
-                    </div>
-                </div>
-            </div>
-            <div class="clear-float"></div>
-            <div class="user-login" ng-show="user.login"> <a class="a-remove-style" href="{{html_url}}">@{{user.login}}</a></div>
-			<div class="user-name" ng-show="user.name"><span style="color: #474350" class="glyphicon glyphicon-user"> {{user.name}} </div>
-            <div class="user-email" ng-show="user.email"> <span style="color: #474350" class="glyphicon glyphicon-envelope"></span> {{user.email}} </div>
-            <div class="user-company" ng-show="user.company"> <span style="color: #474350" class="glyphicon glyphicon-briefcase"></span> {{user.company}} </div>
-            <div class="user-location" ng-show="user.location"><span class="glyphicon glyphicon-map-marker" style="color: #474350"></span> {{ user.location }} </div> 
-			<div class="user-lang">
-                <div class="lang-items">
-                    <div class="lang-item">JavaScript</div>
-                    <div class="lang-item">Java</div>
-                    <div class="lang-item">C ++ </div>
-                    <div class="lang-item">ActionScript</div>
-                </div>
-            </div>
+				</div>
+			</div>
+			<div class="cl-8 lang-wrapper">
+				<div>
+					<div class="lang-items">
+						<div class="lang-item">JavaScript</div>
+						<div class="lang-item">Java</div>
+						<div class="lang-item">C ++ </div>
+						<div class="lang-item">ActionScript</div>
+					</div>
+				</div>
+			</div>
+            <div class="clear-float"></div>    
 			<div class="repos-block-wrapper">
 				<div class="repos-block">
 					<div>
@@ -68,7 +76,7 @@
 							<div class="rep-left">
 								<img src="/static/app/img/forked.png"> {{rep.forks}}
 							</div>
-							<div class="rep-right">
+							<div class="rep-right font-bold">
 								{{rep.language}}
 							</div>
 							<div class="clear-float"></div>
