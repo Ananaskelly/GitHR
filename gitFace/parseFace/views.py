@@ -35,10 +35,13 @@ def have_token(request):
 @api_exception_catcher
 def get_repos(request, profile_name, gitConn = None):
     user = gitConn.get_user(profile_name)
-    pool = ThreadPool(10)
-    l1 = pool.map(lambda num: get_subscriptions_page(num, user), range(20))
-    l2 = pool.map(lambda num: get_repos_page(num, user), range(10))
-    # l3 = [rep for rep in user.get_watched()] #Есть некоторые просто со звёздами, в них кусочки кода
+
+    with ThreadPool(10) as pool:
+        # TODO() estimate number of subscriptions, and don't take 20 for each profile
+        l1 = pool.map(lambda num: get_subscriptions_page(num, user), range(20))
+        l2 = pool.map(lambda num: get_repos_page(num, user), range(5))
+        # l3 = [rep for rep in user.get_watched()] # Small amount of code by statistic
+
     flat_repos = l1 + l2
     repos = reduce(list.__add__, flat_repos)
 
