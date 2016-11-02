@@ -5,4 +5,8 @@ angular.module('app.controller')
 		Content.getUserInfo(login).then(function(response){
 			$scope.user = response;
 		});
+		$scope.repos = {};
+		Content.getUserRepos(login).then(function(response){
+			$scope.repos = response;
+		})
 	})

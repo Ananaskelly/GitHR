@@ -8,7 +8,7 @@
                         Organization
                     </div>
                     <div class="organization-items">
-                        <div ng-repeat="org in user.organisations" class="org-item">
+                        <div ng-repeat="org in user.organisations" class="org-item hover">
                             <a class="a-remove-style organization-a" href="{{org.html_url}}"> {{org.login}}</a>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="clear-float"></div>
-            <div class="user-login" g-show="user.login"> <a class="a-remove-style" href="{{html_url}}">@{{user.login}}</a></div>
+            <div class="user-login" ng-show="user.login"> <a class="a-remove-style" href="{{html_url}}">@{{user.login}}</a></div>
 			<div class="user-name" ng-show="user.name"><span style="color: #474350" class="glyphicon glyphicon-user"> {{user.name}} </div>
             <div class="user-email" ng-show="user.email"> <span style="color: #474350" class="glyphicon glyphicon-envelope"></span> {{user.email}} </div>
             <div class="user-company" ng-show="user.company"> <span style="color: #474350" class="glyphicon glyphicon-briefcase"></span> {{user.company}} </div>
@@ -57,6 +57,31 @@
                     <div class="lang-item">ActionScript</div>
                 </div>
             </div>
+			<div class="repos-block-wrapper">
+				<div class="repos-block">
+					<div>
+						<div ng-repeat="rep in repos" class="repos">
+							<div class="rep-header">
+								{{rep.full_name}}
+							</div>
+							<div class="rep-description">{{rep.description}}</div>
+							<div class="rep-left">
+								<img src="/static/app/img/forked.png"> {{rep.forks}}
+							</div>
+							<div class="rep-right">
+								{{rep.language}}
+							</div>
+							<div class="clear-float"></div>
+							<div class="rep-left">
+								<span class="rep-date-label-color">Created: </span>{{rep.created_at}}
+							</div>
+							<div class="rep-right">
+								<span class="rep-date-label-color">Updated: </span>{{rep.updated_at}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
 </div>

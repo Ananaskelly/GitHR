@@ -21,7 +21,7 @@ html, body {
 .custom-nav-style {
     padding: 3px;
     font-size: 120%;
-    font-family: 'Signika', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 }
 .custom-nav-main-style {
     height: 70px;
@@ -138,7 +138,7 @@ html, body {
 .user-profile-wrapper {
     width: 100%;
     padding-top: 51px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
 }
 .user-profile-content {
     width: 100%;
@@ -148,6 +148,7 @@ html, body {
 }
 .main-info {
     width: 100%;
+	font-family: 'Josefin Sans', sans-serif;
 }
 .main-info-left-info {
     padding: 15px;
@@ -242,6 +243,52 @@ html, body {
     font-size: 120%;
     color: white;
     margin: 1%;
+}
+.repos-block-wrapper {
+	width: 90%;
+    padding: 15px;
+    margin: 0 5%;
+}
+.repos-block {
+	display: inline-block;
+}
+.repos {
+	width: calc(50% - 30px);
+    display: inline-block;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 15px;
+    margin: 15px;
+	text-align: left;
+	background-color: #FEFEFE;
+}
+.rep-header {
+	font-size: 140%;
+    padding: 10px 0;
+    color: #731f10;
+}
+.rep-description {
+	line-height: 2.5ex;
+    height: 5ex;
+    margin: 10px 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    /* height: 3.6em; */
+    text-overflow: -o-ellipsis-lastline;
+}	
+.rep-left, .rep-right {
+	margin: 10px 0;
+}
+.rep-left{
+	float: left;
+}
+.rep-right {
+	float: right;
+}
+.rep-date-label-color{
+	color: #999;
 }
 .score-item-font {
     font-size: 150%;
