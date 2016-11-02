@@ -39,6 +39,19 @@ angular.module('app.service', [])
                         return getting.reject(error);
                     });
                 return getting.promise;
-			}
+			},
+			getUserRepos: function(login) {
+				var getting = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: '/api/repos/'+login
+                }).success(function (response) {
+                    return getting.resolve(response);
+                })
+                    .error(function (error, status) {
+                        return getting.reject(error);
+                    });
+                return getting.promise;
+			},
 		}		
     });
