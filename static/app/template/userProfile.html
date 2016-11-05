@@ -68,7 +68,7 @@
 			<div class="repos-block-wrapper">
 				<div class="repos-block">
 					<div>
-						<div ng-repeat="rep in repos" class="repos">
+						<div ng-repeat="rep in repos track by $index" class="repos">
 							<div class="rep-header">
 								{{rep.full_name}}
 							</div>
