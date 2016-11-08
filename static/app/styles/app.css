@@ -3,6 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
 }
+.ng-cloak { display: none !important; }
 .viewA-content {
     width: 100%;
     height: 100%;
@@ -206,6 +207,12 @@ html, body {
 	max-width: 100%;
 	overflow: hidden;
 }
+.organization-help-block{
+	width: 100%;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 120%;
+}
 .organization-header {
     text-align: center;
     font-size: 150%;
@@ -277,13 +284,14 @@ html, body {
 .user-lang {
     width: 100%;
 }
-.repos-block-wrapper {
+.repos-block-wrapper, .selected-block-wrapper {
 	width: 90%;
     padding: 15px;
     margin: 0 5%;
 }
 .repos-block {
 	display: inline-block;
+	width: 100%;
 }
 .repos {
 	width: calc(50% - 30px);
@@ -325,4 +333,7 @@ html, body {
 }
 .rep-date-label-color{
 	color: #999;
+}
+.lang-block-delete {
+	font-size: 150%;
 }

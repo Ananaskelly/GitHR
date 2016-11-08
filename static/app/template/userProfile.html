@@ -42,11 +42,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="cl-8 organization-wrapper">
+			<div class="cl-8 organization-wrapper" >
 				<div>
 					<div class="organization-header">
-                        Organization
+                        Organisations
                     </div>
+					<div class="organization-help-block" ng-show="user.organisations.length === 0">
+						This user is not a member of any organisation
+					</div>
                     <div class="organization-items">
                         <div ng-repeat="org in user.organisations" class="org-item hover">
                             <a class="a-remove-style organization-a" href="{{org.html_url}}"> {{org.login}}</a>
@@ -57,18 +60,24 @@
 			<div class="cl-8 lang-wrapper">
 				<div>
 					<div class="lang-items">
-						<div class="lang-item">JavaScript</div>
-						<div class="lang-item">Java</div>
-						<div class="lang-item">C ++ </div>
-						<div class="lang-item">ActionScript</div>
+						<div class="lang-item cursor-pointer hover" ng-repeat="lang in user.relevantLangs" ng-click="selectByLang($index)">
+							{{lang}}
+						</div>
 					</div>
 				</div>
 			</div>
-            <div class="clear-float"></div>    
+            <div class="clear-float"></div>
+			<div class="selected-block-wrapper">
+				<div class="lang-items">
+					<div class="lang-item hover" ng-repeat="selectedLang in selectedLangs" >
+						{{selectedLang}}&nbsp;<span class="cursor-pointer lang-block-delete" ng-click="deleteFromSet($index)"><sup>&times;</sup></span>
+					</div>
+				</div>
+			</div>	
 			<div class="repos-block-wrapper">
 				<div class="repos-block">
 					<div>
-						<div ng-repeat="rep in repos track by $index" class="repos">
+						<div ng-repeat="rep in shownRepos track by $index" class="repos">
 							<div class="rep-header">
 								{{rep.full_name}}
 							</div>
